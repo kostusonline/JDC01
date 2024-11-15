@@ -16,7 +16,41 @@ import java.util.Objects;
  * @version 1.1
  */
 public class Main {
-    // Создадим все объекты статически для простоты манипулирования ими.
+    /**
+     * Конструктор экземпляра.
+     */
+    public Main() {
+    }
+
+    /**
+     * Объект для вывода результатов.
+     */
+    private static final PrintWriter out;
+
+    /**
+     * Формат вывода валюты по умолчанию.
+     */
+    private static final DecimalFormat currencyFormat;
+
+    /**
+     * Константа формата вывода чисел по умолчанию.
+     */
+    public static final String NUMBER_FORMAT_DEFAULT = "#,###.#";
+
+    /**
+     * Формат вывода чисел по умолчанию.
+     */
+    private static final DecimalFormat numberFormat;
+
+    static {
+        currencyFormat = new DecimalFormat(Salary.CURRENCY_FORMAT_DEFAULT);
+        numberFormat = new DecimalFormat(NUMBER_FORMAT_DEFAULT);
+
+        // Создаём поток вывода
+        final var charset = System.out.charset();
+        System.out.printf("[charset: %s]%n", charset);
+        out = new PrintWriter(System.out, true, charset);
+    }
 
     /**
      * Валидатор зарплаты.
@@ -30,6 +64,7 @@ public class Main {
      * Мужской пол.
      */
     private static final Gender male = new Gender('m');
+
     /**
      * Женский пол.
      */
@@ -44,53 +79,29 @@ public class Main {
     private static final Person person6 = new Person(nameVerifier, "Гунько Яков Семёнович", "10.12.1985", male);
     private static final Person person7 = new Person(nameVerifier, "Сурдин Александр Борисович", "23.07.2001", male);
     private static final Person person8 = new Person(nameVerifier, "Здунов Питер Ираклиевич", "20.06.1970", male);
-    private static final Person person9 = new Person(nameVerifier, "Семиконечный Серафим Валерьевич", "11.02.1979", male);
 
+    private static final Person person9 = new Person(nameVerifier, "Семиконечный Серафим Валерьевич", "11.02.1979", male);
     private static final Division division1 = new Division(Division.DIVISION_1);
     private static final Division division2 = new Division(Division.DIVISION_2);
     private static final Division division3 = new Division(Division.DIVISION_3);
     private static final Division division4 = new Division(Division.DIVISION_4);
+
     private static final Division division5 = new Division(Division.DIVISION_5);
-
     private static final Employee employee0 = new Employee(person0, division1, salaryVerifier, 150_000);
-    private static final Employee employee1 = new Employee(person1, division1, salaryVerifier, 160_000);
 
+    private static final Employee employee1 = new Employee(person1, division1, salaryVerifier, 160_000);
     private static final Employee employee2 = new Employee(person2, division2, salaryVerifier, 170_000);
     private static final Employee employee3 = new Employee(person3, division2, salaryVerifier, 250_000);
+
     private static final Employee employee4 = new Employee(person4, division2, salaryVerifier, 55_600);
 
     private static final Employee employee5 = new Employee(person5, division3, salaryVerifier, 1_380_200);
-
     private static final Employee employee6 = new Employee(person6, division4, salaryVerifier, 350_000);
+
     private static final Employee employee7 = new Employee(person7, division4, salaryVerifier, 120_000);
-
     private static final Employee employee8 = new Employee(person8, division5, salaryVerifier, 110_000);
+
     private static final Employee employee9 = new Employee(person9, division5, salaryVerifier, 110_000);
-
-    /**
-     * Конструктор.
-     */
-    public Main() {
-    }
-
-    /**
-     * Объект для вывода результатов.
-     */
-    private static PrintWriter out;
-    /**
-     * Формат вывода валюты по умолчанию.
-     */
-    private static final DecimalFormat currencyFormat = new DecimalFormat(Salary.CURRENCY_FORMAT_DEFAULT);
-
-    /**
-     * Формат вывода чисел по умолчанию.
-     */
-    public static final String NUMBER_FORMAT_DEFAULT = "#,###.#";
-
-    /**
-     * Формат вывода чисел по умолчанию.
-     */
-    private static final DecimalFormat numberFormat = new DecimalFormat(NUMBER_FORMAT_DEFAULT);
 
     /**
      * Тест отдела {@link Division}.
@@ -278,11 +289,6 @@ public class Main {
      * @param args аргументы командной строки
      */
     public static void main(String[] args) {
-        // Создаём поток вывода
-        final var charset = System.out.charset();
-        System.out.printf("[charset: %s]%n", charset);
-        out = new PrintWriter(System.out, true, charset);
-
         // Запускаем тесты
         testDivision();
         testGender();
